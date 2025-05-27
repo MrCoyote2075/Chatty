@@ -11,9 +11,9 @@ export const Messages = async (req, res) => {
                 { senderId: receiverId, receiverId: senderId },
             ],
         });
-        res.status(200).send(messages);
+        return res.status(200).send(messages);
     } catch (error) {
         console.log(`Internal Server Error :- ${error}`);
-        res.status(500).send({ error: `Internal Server error :- ${error}` });
+        return res.status(500).send({ error: `Internal Server error :- ${error}` });
     }
 };

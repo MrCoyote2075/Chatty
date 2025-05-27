@@ -3,31 +3,32 @@ import UserModel from "../../model/User.model.js";
 import { GenerateJwtToken } from "../../utils/generateJwtTokens.util.js";
 
 export const Login = async (req, res) => {
+    const { email, password } = req.body;
     try {
-        const { email, password } = req.body;
-
         // Parameters Verifier...
-        if (email && password) {
-            
-            //User Data Retrivel From DataBase...
-            const User = await UserModel.findOne({ email });
-            if (User) {
-                
-                //Verifing Encrypted Password From The DataBase...
-                if (await bcrypt.compare(password, User.password)) {
-                    
-                    //Generating JWT Token...
-                    GenerateJwtToken(User._id, res);
-                    res.status(200).send("User Successfully Logined...");
+        if (!email || !password)
+            return res.status(400).send("Error: Requires All Fields...");
 
-                } else res.status(400).send("Error: Incorrect Password...");
+        //User Data Retrivel From DataBase...
+        const User = await UserModel.findOne({ email });
 
-            } else res.status(400).send("Error: User Not Exists...");
+        if (!User) return res.status(400).send("Error: User Not Exists...");
 
-        } else res.status(400).send("Error: Requires All Fields...");
+        //Verifing Encrypted Password From The DataBase...
+        const isPasswordCorrect = await bcrypt.compare(password, User.password);
+        if (!isPasswordCorrect)
+            return res.status(400).send("Error: Incorrect Password...");
+
+        //Generating JWT Token For User Authentication...
+        GenerateJwtToken(User._id, res);
+
+        return res.status(201).send({
+            message: "User Successfully Logined...",
+            data: User,
+        });
 
     } catch (error) {
         console.log(`Internal Server Error :- ${error}`);
-        res.status(500).send(error);
+        return res.status(500).send(error);
     }
 };

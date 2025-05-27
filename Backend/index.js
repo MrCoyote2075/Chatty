@@ -7,11 +7,17 @@ import cookieParser from "cookie-parser";
 import authRouter from "./server/router/auth.router.js";
 import connectMongoDb from "./server/connection/mongo.connection.js";
 import chatRouter from "./server/router/chat.router.js";
+import cors from "cors";
 
 //Configure Part...
 dotenv.config();
 connectMongoDb();
 const app = express();
+app.use(cors({
+        origin: "http://localhost:7421",
+        credentials: true,
+    })
+);
 const port = process.env.PORT || 8080;
 
 //Extracter Part...
@@ -19,7 +25,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 //Authenticating Part...
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 
 //Chatting Api Part...
 app.use("/api/chat", chatRouter);

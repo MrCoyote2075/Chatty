@@ -41,7 +41,10 @@ export const SendMessages = async (req, res) => {
                 .send({ error: `Error: Message Cannot Be Created` });
 
         await message.save();
-        res.status(200).send(message);
+        res.status(200).send({
+            message: "User Message Retrived Successfully...",
+            data: message,
+        });
     } catch (error) {
         console.log(`Internal Server Error :- ${error}`);
         res.status(500).send({ error: `Internal Server error :- ${error}` });
