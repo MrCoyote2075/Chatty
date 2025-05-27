@@ -1,0 +1,8 @@
+
+POST http://localhost:1247/auth/signup
+Content-Type: application/json
+
+{
+    "username":"Dhanush N",
+    "email":"dhaush@gmail.com"
+}

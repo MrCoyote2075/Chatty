@@ -1,0 +1,6 @@
+{
+    "watch" : ["./server","./index.js"],
+    "ext" : ".js",
+    "exec" : "node index.js",
+    "delay" : 1000
+}
