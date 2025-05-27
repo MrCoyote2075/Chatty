@@ -2,7 +2,7 @@ export const CheckUser = (req, res) => {
     try {
         return res
             .status(200)
-            .send({ message: "User is Authenticated...", data: req.user });
+            .send(req.user);
     } catch (error) {
         console.log(`Internal Server Error :- ${error}`);
         return res

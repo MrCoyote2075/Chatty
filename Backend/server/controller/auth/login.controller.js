@@ -22,10 +22,7 @@ export const Login = async (req, res) => {
         //Generating JWT Token For User Authentication...
         GenerateJwtToken(User._id, res);
 
-        return res.status(201).send({
-            message: "User Successfully Logined...",
-            data: User,
-        });
+        return res.status(201).send(User);
 
     } catch (error) {
         console.log(`Internal Server Error :- ${error}`);

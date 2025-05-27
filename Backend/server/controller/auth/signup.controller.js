@@ -43,10 +43,7 @@ export const SignUp = async (req, res) => {
         // Storing in Database...
         const UserData = await newUser.save();
 
-        res.status(201).send({
-            message: "User Account created Succesfully...",
-            data: UserData,
-        });
+        res.status(201).send(UserData);
         
     } catch (error) {
         // Error Handeling...

@@ -19,10 +19,7 @@ export const UpdateProfilePicture = async (req, res) => {
             { profilePicture: cloudResponse.secure_url },
             { new: true }
         );
-        return res
-            .status(200)
-            .send({ message: "User Profile Picture Updated...", data: User });
-            
+        return res.status(200).send(User);
     } catch (error) {
         // Handeling Error...
         console.log(`Internal Server Error :- ${error}`);

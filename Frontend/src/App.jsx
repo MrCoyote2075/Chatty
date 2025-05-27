@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { useAuthStore } from './Store/useAuthStore'
+import { useEffect } from 'react'
+import { Loader } from "lucide-react";
+
 import './App.css'
+import NavBar from './components/NavBar'
+import HomePage from './pages/HomePage'
+import SignUp from './pages/SignUp'
+import Login from './pages/Login'
+import Settings from './pages/Settings'
+import Profile from './pages/Profile'
 
 function App() {
-  const [count, setCount] = useState(0)
+	const { userData, isCheckingAuth, checkAuth } = useAuthStore();
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	useEffect(() => {
+		checkAuth()
+	}, [checkAuth])
+
+	if (isCheckingAuth && !userData) {
+		return (
+			<>
+				<div className='flex justify-center items-center h-screen'>
+					<Loader className="size-10 animate-spin" />
+				</div>
+			</>
+		)
+	}
+	console.log(userData);
+	return (
+		<>
+			<NavBar />
+			<Routes>
+				<Route path="/" element={!userData ? <Navigate to={"/login"} /> : <HomePage />} />
+				<Route path="/signup" element={userData ? <Navigate to={"/"} /> : <SignUp />} />
+				<Route path="/login" element={userData ? <Navigate to={"/"} /> : <Login />} />
+				<Route path="/settings" element={<Settings />} />
+				<Route path="/profile" element={!userData ? <Navigate to={"/login"} /> : <Profile />} />
+			</Routes>
+		</>
+	)
 }
 
 export default App
