@@ -21,7 +21,9 @@ export const Login = async (req, res) => {
 
         //Generating JWT Token For User Authentication...
         GenerateJwtToken(User._id, res);
-
+        
+        User["password"] = "";
+    
         return res.status(201).send(User);
 
     } catch (error) {

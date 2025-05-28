@@ -19,18 +19,11 @@ function App() {
 		checkAuth()
 	}, [checkAuth])
 
-	if (isCheckingAuth && !userData) {
-		return (
-			<>
-				<div className='flex justify-center items-center h-screen'>
-					<Loader className="size-14 animate-spin" >
-					</Loader>
-					{/* <p>Loading...</p> */}
+	if (isCheckingAuth && !userData) 
+		return 	<div className='flex justify-center items-center h-screen'>
+					<Loader className="size-14 animate-spin" />
 				</div>
-			</>
-		)
-	}
-	console.log(userData);
+
 	return (
 		<>
 			<NavBar />
@@ -47,5 +40,4 @@ function App() {
 		</>
 	)
 }
-
 export default App

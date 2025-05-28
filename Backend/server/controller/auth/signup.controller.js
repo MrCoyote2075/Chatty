@@ -9,19 +9,17 @@ export const SignUp = async (req, res) => {
         if (!fullname || !email || !password)
             return res
                 .status(400)
-                .send({ error: "Error: Requires All Fields..." });
+                .send("Error: Requires All Fields...");
 
         if (password.length < 8)
-            return res.status(400).send({
-                error: "Error: Password must be Minimum 8 characters...",
-            });
+            return res.status(400).send("Error: Password must be Minimum 8 characters...");
 
         // User Already Exists Verifier...
         const user = await UserModel.findOne({ email });
         if (user)
             return res
                 .status(400)
-                .send({ error: "Error: User Already Exists..." });
+                .send("Error: User Already Exists...");
 
         // Encrypter...
         const salt = await bcrypt.genSalt(12);
@@ -35,21 +33,20 @@ export const SignUp = async (req, res) => {
         if (!newUser)
             return res
                 .status(400)
-                .send({ error: "Error: In Creating A New User" });
+                .send("Error: In Creating A New User");
 
         //Genrating Json Web Tokens...
         GenerateJwtToken(newUser._id, res);
 
         // Storing in Database...
         const UserData = await newUser.save();
-
+        UserData["password"] = "";
+        
         res.status(201).send(UserData);
         
     } catch (error) {
         // Error Handeling...
         console.log(`Internal Server Error :- ${error}`);
-        res.status(500).send({
-            error: `Error: Internal server Error: ${error}`,
-        });
+        res.status(500).send(`Error: Internal server Error: ${error}`);
     }
 };

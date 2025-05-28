@@ -14,6 +14,6 @@ export const Contacts = async (req, res) => {
         console.log(`Internal Server Error :- ${error}`);
         return res
             .status(500)
-            .send({ error: `Internal Server error :- ${error}` });
+            .send(`Internal Server error :- ${error}`);
     }
 };

@@ -8,14 +8,14 @@ export const UserAuthentication = async (req, res, next) => {
         if (!token)
             return res
                 .status(400)
-                .send({ error: "Error: Token Not Available..." });
+                .send("Error: Token Not Available...");
 
         // Validating Json Web Token...
         const jwtObj = jwt.verify(token, process.env.JWT_SECRET_KEY);
         if (!jwtObj)
             return res
                 .status(400)
-                .send({ error: "Error: Unauthorised..." });
+                .send("Error: Unauthorised...");
 
         // Retrival of User Data From DataBase...
         const User = await UserModel.findById(jwtObj.userId).select(
@@ -30,6 +30,6 @@ export const UserAuthentication = async (req, res, next) => {
     } catch (error) {
         return res
             .status(500)
-            .send({ error: `Error: Internal Server error, :- ${error}` });
+            .send(`Error: Internal Server error, :- ${error}`);
     }
 };

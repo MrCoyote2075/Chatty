@@ -12,7 +12,7 @@ export const SendMessages = async (req, res) => {
         if (!text && !image)
             return res
                 .status(400)
-                .send({ error: `Error: No Messages Found...` });
+                .send(`Error: No Messages Found...`);
 
         // Storing Image in Cloudinary...
         if (image) {
@@ -20,9 +20,7 @@ export const SendMessages = async (req, res) => {
                 .upload(image)
                 .then((res) => res.secure_url)
                 .catch((error) =>
-                    res.status(500).send({
-                        error: `Error: Unable To Store Images..., :- ${error}`,
-                    })
+                    res.status(500).send(`Error: Unable To Store Images..., :- ${error}`)
                 );
         }
 
@@ -38,7 +36,7 @@ export const SendMessages = async (req, res) => {
         if (!message)
             return res
                 .status(400)
-                .send({ error: `Error: Message Cannot Be Created` });
+                .send(`Error: Message Cannot Be Created`);
 
         await message.save();
         res.status(200).send({
@@ -47,6 +45,6 @@ export const SendMessages = async (req, res) => {
         });
     } catch (error) {
         console.log(`Internal Server Error :- ${error}`);
-        res.status(500).send({ error: `Internal Server error :- ${error}` });
+        res.status(500).send(`Internal Server error :- ${error}`);
     }
 };

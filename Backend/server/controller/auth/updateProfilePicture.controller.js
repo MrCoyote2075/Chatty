@@ -8,7 +8,7 @@ export const UpdateProfilePicture = async (req, res) => {
     if (!profilePicture)
         return res
             .status(400)
-            .send({ error: "Error: Profile Picture Required..." });
+            .send("Error: Profile Picture Required...");
     try {
         // Uploading Images to Cloudinary...
         const cloudResponse = await cloudinary.uploader.upload(profilePicture);
@@ -23,8 +23,6 @@ export const UpdateProfilePicture = async (req, res) => {
     } catch (error) {
         // Handeling Error...
         console.log(`Internal Server Error :- ${error}`);
-        return res.status(500).send({
-            error: `Error: Couldn't Process Profile Picture , :- ${error}`,
-        });
+        return res.status(500).send(`Error: Couldn't Process Profile Picture , :- ${error}`);
     }
 };
