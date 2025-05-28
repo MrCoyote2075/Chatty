@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthStore } from './Store/useAuthStore'
 import { useEffect } from 'react'
 import { Loader } from "lucide-react";
+import { Toaster } from "react-hot-toast";
 
 import './App.css'
 import NavBar from './components/NavBar'
@@ -22,7 +23,9 @@ function App() {
 		return (
 			<>
 				<div className='flex justify-center items-center h-screen'>
-					<Loader className="size-10 animate-spin" />
+					<Loader className="size-14 animate-spin" >
+					</Loader>
+					{/* <p>Loading...</p> */}
 				</div>
 			</>
 		)
@@ -31,6 +34,7 @@ function App() {
 	return (
 		<>
 			<NavBar />
+
 			<Routes>
 				<Route path="/" element={!userData ? <Navigate to={"/login"} /> : <HomePage />} />
 				<Route path="/signup" element={userData ? <Navigate to={"/"} /> : <SignUp />} />
@@ -38,6 +42,8 @@ function App() {
 				<Route path="/settings" element={<Settings />} />
 				<Route path="/profile" element={!userData ? <Navigate to={"/login"} /> : <Profile />} />
 			</Routes>
+
+			<Toaster />
 		</>
 	)
 }

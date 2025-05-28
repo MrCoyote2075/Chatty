@@ -14,9 +14,10 @@ export const GenerateJwtToken = (userId, res) => {
             sameSite: "strict", // requests From My Site Only Allowed...
             secure: false, // protocol security... [https]
         });
+
+        return token;
+        
     } catch (error) {
         throw new Error(`Error: Creating Json Web Token Failed... :- ${error}`);
     }
-
-    return token;
 };

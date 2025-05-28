@@ -6,7 +6,7 @@ import { Logout } from "../controller/auth/logout.controller.js";
 
 import { UserAuthentication } from "../middleware/UserAuthentication.middleware.js";
 import { UpdateProfilePicture } from "../controller/auth/updateProfilePicture.controller.js";
-import { CheckUser } from "../controller/auth/CheckUser.controller.js";
+import { CheckUser } from "../controller/auth/checkUser.controller.js";
 
 const router = express.Router();
 
