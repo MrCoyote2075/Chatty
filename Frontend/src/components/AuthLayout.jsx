@@ -2,13 +2,16 @@
 import { MessageSquare } from "lucide-react";
 import { AnimationPattern } from "./AnimationPattern";
 
-export const AuthLayout = ({ title, subtitle, children, animationTitle}) => {
+export const AuthLayout = ({ title, subtitle, children, animationTitle }) => {
     return (
         <div className="h-screen grid lg:grid-cols-2">
             <div className="flex flex-col justify-center items-center p-6 sm:p-12">
                 <div className="w-full max-w-md space-y-8">
                     <div className="text-center mb-8">
                         <div className="flex flex-col items-center gap-2 group">
+                            {/* <div className="w-20 h-20 rounded-lg bg-primary/10 flex items-center justify-center animate-pulse">
+                                <img src="ChattyLogo.png" alt="Logo" className="w-16 h-14 text-primary animate-none" />
+                            </div> */}
                             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                                 <MessageSquare className="w-6 h-6 text-primary" />
                             </div>

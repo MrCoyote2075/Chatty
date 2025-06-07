@@ -13,8 +13,11 @@ const UserSchema = new mongoose.Schema(
         },
         password: {
             type: String,
-            required: true,
             minlength: 8,
+        },
+        isGoogleUser: {
+            type: Boolean,
+            default: false,
         },
         profilePicture: {
             type: String,

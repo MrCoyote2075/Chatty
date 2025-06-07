@@ -7,6 +7,6 @@ export const CheckUser = (req, res) => {
         console.log(`Internal Server Error :- ${error}`);
         return res
             .status(500)
-            .send({ error: `Error: Internal Server error, :- ${error}` });
+            .send({ error: `Error: Internal Server error...` });
     }
 };

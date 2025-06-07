@@ -47,6 +47,6 @@ export const SignUp = async (req, res) => {
     } catch (error) {
         // Error Handeling...
         console.log(`Internal Server Error :- ${error}`);
-        res.status(500).send(`Error: Internal server Error: ${error}`);
+        res.status(500).send(`Error: Internal server Error...`);
     }
 };

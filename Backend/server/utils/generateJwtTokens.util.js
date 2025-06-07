@@ -4,7 +4,7 @@ export const GenerateJwtToken = (userId, res) => {
     try {
         // Token...
         const token = jwt.sign({ userId }, process.env.JWT_SECRET_KEY, {
-            expiresIn: "1d",
+            expiresIn: "7d",
         });
 
         // Cookie...

@@ -49,7 +49,8 @@ const Login = () => {
 							</div>
 							<input
 								type="email"
-								className="input w-full pl-10 text-sm placeholder-gray-500 focus:outline-none focus:border-white border border-white/30 bg-transparent"
+								className="input w-full pl-10 text-sm placeholder-gray-500 focus:outline-none
+								 focus:border-white border border-white/30 bg-transparent"
 								placeholder="eg: dhanudanush@gmail.com"
 								value={userData.email}
 								onChange={(e) => setUserData({ ...userData, email: e.target.value })}
