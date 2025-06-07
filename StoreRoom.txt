@@ -1,3 +1,0 @@
-Google OAuth Secret = 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
-
-Google OAuth Id = 544781687726-krrbken1b2snnadibklgadasitkt557h.apps.googleusercontent.com
