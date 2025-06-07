@@ -7,7 +7,11 @@ export const GoogleAuthenticateCallback = async (req, res, next) => {
 
         if (!user) return next();
 
+        //Generating JWT Token For User Authentication...
+        GenerateJwtToken(user._id, res);
+
         return res.status(200).send(user);
+        
     } catch (error) {
         console.log(error);
         res.status(500).send("Error: Internal Server Error...");
@@ -25,7 +29,12 @@ export const GoogleSignin = async (req, res) => {
             profilePicture: profile.picture,
         });
 
+        // Inserting in DataBase...
         const newUser = await user.save();
+
+        //Generating JWT Token For User Authentication...
+        GenerateJwtToken(newUser._id, res);
+        
         return res.status(200).send(newUser);
     } catch (error) {
         console.log(error);
