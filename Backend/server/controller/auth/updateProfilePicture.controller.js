@@ -8,6 +8,8 @@ export const UpdateProfilePicture = async (req, res) => {
     if (!profilePicture)
         return res.status(400).send("Error: Profile Picture Required...");
     try {
+        console.log("Content-Length:", req.headers['content-length'], "bytes");
+        
         // Uploading Images to Cloudinary...
         const cloudResponse = await cloudinary.uploader.upload(profilePicture);
 

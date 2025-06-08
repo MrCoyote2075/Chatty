@@ -34,7 +34,7 @@ const Profile = () => {
                <div className="flex flex-col items-center gap-3">
                   <div className="relative">
                      <img
-                        src={userData.profilePicture || imageUrl || "/avatar.png"}
+                        src={userData.profilePicture || imageUrl || "/avatar.svg"}
                         alt="Profile"
                         className={`size-32 rounded-full object-cover border-4 ${isUpdatingProfile ? "animate-pulse pointer-events-none" : ""
                            }`}
@@ -61,7 +61,7 @@ const Profile = () => {
                   <p className="text-sm text-zinc-400 ">
                      {isUpdatingProfile
                         ? "Uploading Please Wait..."
-                        : `Click the Camera Icon,\n to Update Your Profile Picture`}
+                        : `Click the Camera to Update Your Profile Picture`}
                   </p>
                </div>
 

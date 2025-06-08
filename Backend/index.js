@@ -1,5 +1,3 @@
-
-
 //Maximum Effort.....
 
 //Package Importing Part...
@@ -18,8 +16,9 @@ dotenv.config();
 connectMongoDb();
 const app = express();
 
-app.use(cors({
-        origin: "http://localhost:7421",
+app.use(
+    cors({
+        origin: ["http://localhost:7421","https://production-URL"],
         credentials: true,
     })
 );
@@ -30,7 +29,6 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
-
 
 //Normal Authenticating Part...
 app.use("/auth", authRouter);

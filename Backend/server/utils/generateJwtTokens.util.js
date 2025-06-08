@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const GenerateJwtToken = (userId, res) => {
     try {
@@ -12,11 +14,11 @@ export const GenerateJwtToken = (userId, res) => {
             maxAge: 1 * 24 * 60 * 60 * 1000, // weeks * days * hours * mins * secs * millis ...
             httpOnly: true, //url secure...
             sameSite: "strict", // requests From My Site Only Allowed...
-            secure: false, // protocol security... [https]
+            secure: process.env.PROJECT_CURRENTLY != 'development', // protocol security... [https]
         });
 
         return token;
-        
+
     } catch (error) {
         throw new Error(`Error: Creating Json Web Token Failed... :- ${error}`);
     }

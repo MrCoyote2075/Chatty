@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { axiosInstence } from "../utils/axiosInstence";
+import { axiosInstence } from "../utils/axiosInstence.js";
 import toast from "react-hot-toast";
 
 export const useAuthStore = create((set) => ({
@@ -9,6 +9,7 @@ export const useAuthStore = create((set) => ({
     isSigningIn: false,
     isLogingIn: false,
     isUpdatingProfile: false,
+    isGoogleAuthenticating: false,
 
     checkAuth: async () => {
         set({ isCheckingAuth: true });
@@ -93,6 +94,11 @@ export const useAuthStore = create((set) => ({
         }
     },
 
+    googleAuth: () => {
+        set({ isGoogleAuthenticating: true });
+        window.location.href = 'http://localhost:1247/auth/provider/google';
+    },
+
     updateProfile: async (image) => {
         try {
             set({ isUpdatingProfile: true });
@@ -101,7 +107,7 @@ export const useAuthStore = create((set) => ({
 
         } catch (error) {
             const err = error.response ?
-                error.response.data :
+                "Error: Couldn't Update Profile...":
                 "Server is Down";
 
             console.error(err);
