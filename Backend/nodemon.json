@@ -1,6 +1,6 @@
 {
     "watch" : ["./server","./index.js"],
-    "ext" : ".js",
+    "ext" : ".js,.html,.ts,.tsx",
     "exec" : "node index.js",
     "delay" : 1000
 }

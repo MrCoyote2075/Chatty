@@ -37,7 +37,7 @@ app.use("/auth", authRouter);
 app.use("/auth/provider", googleAuthRouter);
 
 //Chatting Api Part...
-app.use("/api/chat", chatRouter);
+app.use("/api/chats", chatRouter);
 
 //Server Lienting Part...
 app.listen(port, () =>
