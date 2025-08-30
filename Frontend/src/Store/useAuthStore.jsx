@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { axiosInstence } from "../utils/axiosInstence";
+import { axiosInstence } from "../utils/axiosInstence.js";
 import toast from "react-hot-toast";
 
 export const useAuthStore = create((set) => ({
@@ -8,6 +8,8 @@ export const useAuthStore = create((set) => ({
     isCheckingAuth: false,
     isSigningIn: false,
     isLogingIn: false,
+    isUpdatingProfile: false,
+    isGoogleAuthenticating: false,
 
     checkAuth: async () => {
         set({ isCheckingAuth: true });
@@ -60,7 +62,6 @@ export const useAuthStore = create((set) => ({
             let err = error.response ?
                 error.response.data :
                 "Error: Server is Down"
-
             console.error(error);
             toast.error(err);
             set({ userData: null, isAuthenticated: false });
@@ -86,9 +87,33 @@ export const useAuthStore = create((set) => ({
             toast.error(err);
 
         } finally {
-            setTimeout(()=> {
+            setTimeout(() => {
                 set({ isCheckingAuth: false });
-            },500)
+            }, 500)
+        }
+    },
+
+    googleAuth: () => {
+        set({ isGoogleAuthenticating: true });
+        window.location.href = 'http://localhost:1247/auth/provider/google';
+    },
+
+    updateProfile: async (image) => {
+        try {
+            set({ isUpdatingProfile: true });
+            await axiosInstence.put("/auth/update-profile-picture", { profilePicture: image });
+            toast.success("Profile Updated Successfull...");
+
+        } catch (error) {
+            const err = error.response ?
+                "Error: Couldn't Update Profile...":
+                "Server is Down";
+
+            console.error(err);
+            toast.error(err);
+
+        } finally {
+            set({ isUpdatingProfile: false });
         }
     }
 }))

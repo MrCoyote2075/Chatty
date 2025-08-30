@@ -6,29 +6,38 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import authRouter from "./server/router/auth.router.js";
 import connectMongoDb from "./server/connection/mongo.connection.js";
+import passport from "./server/connection/googleOAuth.connection.js";
 import chatRouter from "./server/router/chat.router.js";
+import googleAuthRouter from "./server/router/auth.provider.router.js";
 import cors from "cors";
 
 //Configure Part...
 dotenv.config();
 connectMongoDb();
 const app = express();
-app.use(cors({
-        origin: "http://localhost:7421",
+
+app.use(
+    cors({
+        origin: ["http://localhost:7421","https://production-URL"],
         credentials: true,
     })
 );
-const port = process.env.PORT || 8080;
+
+const port = process.env.PORT;
 
 //Extracter Part...
 app.use(express.json());
 app.use(cookieParser());
+app.use(passport.initialize());
 
-//Authenticating Part...
-app.use("/api/auth", authRouter);
+//Normal Authenticating Part...
+app.use("/auth", authRouter);
+
+//Google Authenticating Part...
+app.use("/auth/provider", googleAuthRouter);
 
 //Chatting Api Part...
-app.use("/api/chat", chatRouter);
+app.use("/api/chats", chatRouter);
 
 //Server Lienting Part...
 app.listen(port, () =>

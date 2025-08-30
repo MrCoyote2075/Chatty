@@ -28,8 +28,9 @@ export const UserAuthentication = async (req, res, next) => {
         next();
         
     } catch (error) {
+        console.error(`Error: Internal Server error, :- ${error}`);
         return res
             .status(500)
-            .send(`Error: Internal Server error, :- ${error}`);
+            .send(`Error: Internal Server error...`);
     }
 };

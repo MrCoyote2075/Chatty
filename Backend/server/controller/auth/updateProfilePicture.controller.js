@@ -6,14 +6,14 @@ export const UpdateProfilePicture = async (req, res) => {
 
     // Checking Profile Picture...
     if (!profilePicture)
-        return res
-            .status(400)
-            .send("Error: Profile Picture Required...");
+        return res.status(400).send("Error: Profile Picture Required...");
     try {
+        console.log("Content-Length:", req.headers['content-length'], "bytes");
+        
         // Uploading Images to Cloudinary...
         const cloudResponse = await cloudinary.uploader.upload(profilePicture);
 
-        // Storing Infomation in Database...
+        // Updating ProfilePic By Id in Database...
         const User = await UserModel.findByIdAndUpdate(
             req.user._id,
             { profilePicture: cloudResponse.secure_url },
@@ -23,6 +23,8 @@ export const UpdateProfilePicture = async (req, res) => {
     } catch (error) {
         // Handeling Error...
         console.log(`Internal Server Error :- ${error}`);
-        return res.status(500).send(`Error: Couldn't Process Profile Picture , :- ${error}`);
+        return res
+            .status(500)
+            .send(`Error: Couldn't Process Profile Picture...`);
     }
 };

@@ -35,11 +35,12 @@ export const SignUp = async (req, res) => {
                 .status(400)
                 .send("Error: In Creating A New User");
 
-        //Genrating Json Web Tokens...
-        GenerateJwtToken(newUser._id, res);
-
         // Storing in Database...
         const UserData = await newUser.save();
+        
+        //Generating Json Web Tokens...
+        GenerateJwtToken(UserData._id, res);
+
         UserData["password"] = "";
         
         res.status(201).send(UserData);
@@ -47,6 +48,6 @@ export const SignUp = async (req, res) => {
     } catch (error) {
         // Error Handeling...
         console.log(`Internal Server Error :- ${error}`);
-        res.status(500).send(`Error: Internal server Error: ${error}`);
+        res.status(500).send(`Error: Internal server Error...`);
     }
 };
