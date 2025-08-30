@@ -62,7 +62,6 @@ export const useAuthStore = create((set) => ({
             let err = error.response ?
                 error.response.data :
                 "Error: Server is Down"
-
             console.error(error);
             toast.error(err);
             set({ userData: null, isAuthenticated: false });

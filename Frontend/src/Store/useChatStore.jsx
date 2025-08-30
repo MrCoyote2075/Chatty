@@ -1,7 +1,8 @@
 import toast from "react-hot-toast";
 import { create } from "zustand";
 import { axiosInstence } from "../utils/axiosInstence.js";
-
+// import { useAuthStore } from "./useAuthStore.jsx";
+// const { userData } = useAuthStore();
 export const useChatStore = create((set) => ({
     users : [],
     messages : [],
@@ -9,7 +10,10 @@ export const useChatStore = create((set) => ({
     setIsUsersLoading : false,
     setIsMessagesLoading: false,
 
-    getUser : async (userId) => {
+    setSelectedUser : (user) => {
+        set({selectedUser : user});
+    },
+    getUsers : async (userId) => {
         set({setIsUsersLoading : true});
         try {
             const apiRes = await axiosInstence(`/api/chats/contacts/${userId}`);

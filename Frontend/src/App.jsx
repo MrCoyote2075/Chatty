@@ -30,7 +30,6 @@ function App() {
 		<>
 			<div data-theme={theme}>
 				<NavBar />
-
 				<Routes>
 					<Route path="/" element={userData ? <HomePage /> : <Navigate to={"/login"} />} />
 					<Route path="/signup" element={userData ? <Navigate to={"/"} /> : <SignUp />} />

@@ -19,7 +19,7 @@ const Login = () => {
 		if (!(/\S+@\S+.\S/.test(userData.email)))
 			return toast.error("Invalid Email...");
 
-		if (userData.password.length < 8)
+		if(userData.password.length < 8)
 			return toast.error("Invalid Credential");
 
 		return true;
@@ -133,7 +133,7 @@ const Login = () => {
 						</button>
 
 					</div>
-					
+
 				</form>
 			</AuthLayout >
 
